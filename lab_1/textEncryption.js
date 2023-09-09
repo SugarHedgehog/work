@@ -1,7 +1,14 @@
 var fs = require('fs');
 
-let letterRU = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Ы", "Э", "Ю", "Я"];
-let letterRUReverse = letterRU.slice().reverse();
+let letterRU = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К", "Л", "М", "Н", "О", "П", "Р", "С", "Т", "У", "Ф", "Х", "Ц", "Ч", "Ш", "Щ", "Э", "Ю", "Я"];
+
+let letterRUShuffle = shuffle(letterRU.slice());
+
+console.log("Ключ:")
+for (let i = 0; i < 4; i++) {
+    console.log([letterRU.slice().slice(7 * i, 7 * (i+1)).join(' '), letterRUShuffle.slice().slice(7 * i, 7 * (i+1)).join(' ')].join('   '));
+}
+
 
 let fileContent = fs.readFileSync("file.txt", "utf8");
 
@@ -17,12 +24,12 @@ fs.appendFileSync("report.txt", "\nЗашифрованный текст\n\n" + 
 fs.appendFileSync("report.txt", "Статистика для зашифрованного текста\n\n")
 statistics(encryptionText, "report.txt");
 
-fs.appendFileSync("report.txt", "\n\nВывод: эта лабораторная работа ничему меня не научила, я не узнала ничего нового и не овладела никакими новыми навыками.")
+fs.appendFileSync("report.txt", "\n\nВывод:  успешно проведена программная реализация шифрования методом простой перестановки.")
 
 
 function formatText(text) {
     text = text.toUpperCase();
-    text = text.replaceAll(' ', '').replaceAll('Ё', '').replaceAll('Ё', '').replaceAll('Ь', '').replaceAll('Ъ', '').replaceAll('-', '').replaceAll('—', '').replaceAll('.', '').replaceAll(',', '').replaceAll(')', '').replaceAll('(', '').replaceAll('\n', '').replaceAll(';', '');
+    text = text.replaceAll(' ', '').replaceAll('Ё', 'Е').replaceAll('Й', 'И').replaceAll('Ь', '').replaceAll('Ъ', '').replaceAll('Ы', 'И').replaceAll('-', '').replaceAll('—', '').replaceAll('.', '').replaceAll(',', '').replaceAll(')', '').replaceAll('(', '').replaceAll('\n', '').replaceAll(';', '');
     return text;
 }
 
@@ -41,9 +48,10 @@ function statistics(text, filename) {
 
 function encryption(text) {
     let encryption = '';
+
     for (let i = 0; i < text.length; i++) {
-        if (letterRUReverse[letterRU.indexOf(text[i])] != undefined)
-            encryption += letterRUReverse[letterRU.indexOf(text[i])]
+        if (letterRUShuffle[letterRU.indexOf(text[i])] != undefined)
+            encryption += letterRUShuffle[letterRU.indexOf(text[i])]
     }
     return encryption;
 }
@@ -56,7 +64,13 @@ function indexOfMatches(letters, numberOfCharacters) {
     return index;
 }
 
-
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 
 
