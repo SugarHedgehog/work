@@ -1,0 +1,25 @@
+{
+  "name": "encryption",
+  "version": "1.0.0",
+  "description": "for text",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "encryption.git"
+  },
+  "keywords": [
+    "343434"
+  ],
+  "author": "SugarHedgehog",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.2"
+  },
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}
