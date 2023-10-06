@@ -76,7 +76,7 @@ function VigenereCipher(text, key) {
 
     for (let i = 0; i < text.length; i++) {
         if (letterRU.includes(text[i])) {
-            console.log([text[i], letterRU.indexOf(text[i]), key[count],letterRU.indexOf(key[count])])
+            //console.log([text[i], letterRU.indexOf(text[i]), key[count],letterRU.indexOf(key[count])])
             encryption += letterRU[(letterRU.indexOf(text[i]) + letterRU.indexOf(key[count])) % letterRU.length];
             count++;
             if (key.length == count) {
