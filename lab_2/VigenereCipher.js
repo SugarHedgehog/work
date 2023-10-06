@@ -15,7 +15,7 @@ let key = ec.keForVigenereCipher();
 
 let encryptionText = ec.VigenereCipher(formattingText, key);
 
-fs.appendFileSync("report.txt", "\nЗашифрованный текст\n\n" + encryptionText + "\n\n");
+fs.appendFileSync("report.txt", "\nЗашифрованный текст\n\n" + encryptionText + "\n\n" + "Ключ: " + key + "\n\n");
 fs.appendFileSync("report.txt", "Статистика для зашифрованного текста\n\n")
 ec.statistics(encryptionText, "report.txt");
 
